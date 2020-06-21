@@ -2,9 +2,8 @@ import csv
 import sys
 import re
 
+
 # read both dna and sample file
-
-
 def main():
     if len(sys.argv) != 3:
         print("Usage: python dna.py data.csv sequence.txt")
