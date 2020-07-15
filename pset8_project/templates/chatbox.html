@@ -1,0 +1,80 @@
+{% extends "layout.html" %}
+
+{% block main %}
+
+
+<main class="container p-5">
+
+<form action="/chatbox" method="post">
+
+<div class="form-group">
+<h3> Chatbox </h3>
+</div>
+
+
+<div class="form-group">
+<input type="text" readonly class="form-control" style="text-align: center" id="receiver" name="receiver" value={{user}}>
+</div>
+
+
+<div class="form-group" name="messages" id="messages">
+    {% for message in messages %}
+    {% if message[0]  != user   %}
+    <div class="outgoing_msg">
+        <div class="sent_msg">
+            <h6 style="text-align: left">{{ message[0] }}</h6>
+            <p>{{ message[1] }}</p>
+            <div style="text-align: left; font-size: 12px">{{ message[2]}} </div>
+        </div>
+     </div>
+    {% else %}
+    <div class="incoming_msg">
+        <div class="received_msg">
+            <h6 style="text-align: left">{{ message[0] }}</h6>
+            <p>{{ message[1] }}</p>
+            <div style="text-align: left; font-size: 12px">{{ message[2]}} </div>
+        </div>
+     </div>
+    {% endif %}
+    {% endfor %}
+</div>
+
+
+<div class="form-group">
+<textarea id="message" name="message" rows="5" cols="60" placeholder="Enter here">
+</textarea>
+</div>
+
+<div class="form-group">
+<input type="submit" id="submit0" name="submit0" class="btn btn-primary" value="Send" disabled>
+</div>
+
+<div class="form-group">
+<input type="submit" id="submit1" name="submit1" class="btn btn-secondary" value="Clear All Chat">
+</div>
+
+</form>
+
+
+
+
+<script>
+    document.querySelector("#message").onkeyup = function() {
+        if(document.querySelector("#message").value == "")
+        {
+            document.querySelector("#submit0").disabled = true;
+        }
+        else
+        {
+            document.querySelector("#submit0").disabled = false;
+        }
+
+    }
+</script>
+
+
+
+</main>
+
+
+{% endblock %}

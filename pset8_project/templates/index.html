@@ -1,0 +1,108 @@
+{% extends "layout.html" %}
+
+{% block main %}
+
+<main class="container p-5">
+
+<div class="form-group">
+<h3> Portfolio Summary </h3>
+</div>
+
+<div class="form-group">
+<table class="table table-striped">
+<thead>
+    <tr>
+      <th scope="col">Symbol</th>
+      <th scope="col">Name</th>
+      <th scope="col">Price</th>
+      <th scope="col">Shares</th>
+      <th scope="col">Total</th>
+      <th scope="col">Return</th>
+    </tr>
+</thead>
+
+<tbody>
+    {% for portfolio in portfolios %}
+    <tr>
+      <td>{{ portfolio[0] }}</td>
+      <td>{{ portfolio[1] }}</td>
+      <td>{{ portfolio[2] }}</td>
+      <td>{{ portfolio[3] }}</td>
+      <td>{{ portfolio[5] }}</td>
+      {% if portfolio[7] < 0 %}
+      <td style="color:red">{{ portfolio[6] }}&nbsp;({{ portfolio[7] }}%)</td>
+      {% else %}
+      <td style="color:green">{{portfolio[6] }}&nbsp;({{ portfolio[7] }}%)</td>
+      {% endif %}
+    </tr>
+    {% endfor %}
+    <tr class="table table-borderless">
+      <th scope="col">CASH</th>
+      <th scope="col"> </th>
+      <th scope="col"> </th>
+      <th scope="col"> </th>
+      <th scope="col">{{ cash }}</th>
+      <th scope="col"> </th>
+    </tr>
+    <tr class="table table-borderless">
+      <th scope="col">BALANCE</th>
+      <th scope="col"> </th>
+      <th scope="col"> </th>
+      <th scope="col"> </th>
+      <th scope="col">{{ balance }}</th>
+      {% if balanceretpct < 0 %}
+      <th style="color:red">{{ balanceret }}&nbsp;({{ balanceretpct }}%)</th>
+      {% else %}
+      <th style="color:green">{{ balanceret }}&nbsp;({{ balanceretpct }}%)</th>
+      {% endif %}
+    </tr>
+</tbody>
+</table>
+</div>
+
+<div class="form-group">
+<h3> Investment Analysis </h3>
+</div>
+
+<div class="form-group">
+<h5>{{ title }}</h5>
+</div>
+
+<div class="form-group">
+<canvas id="chart" width="600" height="400"></canvas>
+</div>
+
+
+
+
+
+
+
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>
+<script>
+var pieData = [
+  {% for item, label, colors in set %}
+    {
+      value: {{item}}.toFixed(2),
+      label: "{{label}} (%)",
+      color : "{{colors}}"
+    },
+  {% endfor %}
+];
+
+// get bar chart canvas
+var mychart = document.getElementById("chart").getContext("2d");
+
+
+// draw pie chart
+new Chart(document.getElementById("chart").getContext("2d")).Pie(pieData);
+</script>
+
+
+
+
+
+</main>
+
+{% endblock %}

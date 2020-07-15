@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block main %}
+
+<main class="container p-5">
+
+<form action="/message" method="post">
+
+<div class="form-group">
+<h3>Search for Users</h3>
+</div>
+
+
+<div class="form-group">
+<select id="chat" name="chat"  placeholder="Chat" class="form-control">
+    <option>Please select ...</option>
+    {% for user in users %}
+     <option>{{ user }}</option>
+     {% endfor %}
+
+</select>
+</div>
+
+
+<div class="form-group">
+    <input class="form-control" id="receiver" name="receiver" placeholder="Search Username" type="text">
+</div>
+
+<div>
+<input class="btn btn-primary" id="submit" type="submit" value="Chat">
+</div>
+</form>
+
+
+
+
+</main>
+
+{% endblock %}

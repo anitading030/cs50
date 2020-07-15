@@ -1,0 +1,160 @@
+{% extends "layout.html" %}
+
+{% block main %}
+
+<div id="success" name="success" >
+  <span style="font-weight: bold; color: green">{{ success }}</span>
+</div>
+
+
+<main class="container p-5">
+
+
+<form action="/setting" method="post">
+
+
+    <div>
+        <h3 class="form-group">Account</h3>
+    </div>
+
+    <div class="form-group">
+        <span style="font-weight: bold">Username</span> {{ username }}
+    </div>
+
+    <div class="form-group">
+        <input class="form-control" id="email" name="email" placeholder="avocado@finance.com" type="email">
+    </div>
+    <div class="form-group">
+        <input class="btn btn-primary" id="submit0" type="submit" value="Update Email" disabled>
+    </div>
+
+    <div class="form-group">
+        <input class="form-control" id="password" name="password" placeholder="Change Password" type="password">
+    </div>
+
+    <div class="form-group">
+        <input class="form-control" id="reenter" name="reenter" placeholder="Confirm Password" type="password">
+    </div>
+
+    <div class="form-group">
+    <input class="btn btn-primary" id="submit1" type="submit" value="Submit" disabled>
+    <small id="passwordHelpInline" class="form-text text-muted">
+      Your password must be 6-20 characters long, contain letters, numbers, and special characters.
+    </small>
+    </div>
+
+<br>
+
+    <div>
+        <h3 class="form-group">Transfer</h3>
+    </div>
+
+    <div class="form-group">
+        <span style="font-weight: bold">Current Cash</span> {{ cash }}
+    </div>
+
+    <div class="form-group">
+        <input class="form-control" id="topup" name="topup" placeholder="Transfer to AVOCADO" type="number" min="0.00" step="10" value="0">
+        <input class="btn btn-primary" id="submit2" type="submit" value=" Top Up " disabled>
+    </div>
+
+    <div class="form-group">
+        <input class="form-control" id="withdraw" name="withdraw" placeholder="Transfer to My Wallet" type="number" min="0.00" step="" value="0">
+        <input class="btn btn-primary" id="submit3" type="submit" value="Withdraw" disabled>
+    </div>
+<br>
+
+    <div>
+        <a href="/help">Get Help</a>
+    </div>
+</form>
+
+
+
+
+
+<script>
+    document.querySelector("#reenter").onkeyup = function() {
+        var paswd =  /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,20}$/;
+        if(document.querySelector("#password").value == document.querySelector("#reenter").value && document.querySelector("#password").value.match(paswd))
+        {
+            document.querySelector("#submit1").disabled = false;
+        }
+        else if(document.querySelector("#password").value !== document.querySelector("#reenter").value)
+         {
+            document.querySelector("#submit1").disabled = true;
+        }
+        else
+        {
+            document.querySelector("#submit1").disabled = true;
+        }
+    }
+</script>
+
+
+
+<script>
+    document.querySelector("#topup").onkeyup = function() {
+        if(document.querySelector("#topup").value > 0)
+        {
+            document.querySelector("#submit2").disabled = false;
+        }
+        else
+        {
+            document.querySelector("#submit2").disabled = true;
+        }
+    }
+</script>
+
+
+<script>
+    document.querySelector("#email").onkeyup = function() {
+        if(document.querySelector("#email").value == "")
+        {
+            document.querySelector("#submit0").disabled = true;
+        }
+        else
+        {
+            document.querySelector("#submit0").disabled = false;
+        }
+    }
+</script>
+
+
+<script>
+    document.querySelector("#withdraw").onkeyup = function() {
+        if(document.querySelector("#withdraw").value > 0)
+        {
+            document.querySelector("#submit3").disabled = false;
+        }
+        else
+        {
+            document.querySelector("#submit3").disabled = true;
+        }
+    }
+</script>
+
+
+
+<script>
+function disappear()
+{
+    let body = document.querySelector('#success');
+    if (body.style.visibility === 'visible')
+    {
+        body.style.visibility = 'hidden';
+    }
+    else
+    {
+        body.style.visibility = 'hidden';
+    }
+}
+//blink every 500 ms
+window.setInterval(disappear, 1000);
+</script>
+
+
+
+
+</main>
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+
+{% block main %}
+
+<main class="container p-5">
+
+<div class="form-group">
+<h3>Join AVOCADO</h3>
+</div>
+
+<form action="/register" method="post">
+    <div class="form-group">
+        <input class="form-control" id="username" name="username" placeholder="Username" type="text">
+    </div>
+
+    <div class="form-group">
+        <input class="form-control" id="password" name="password" placeholder="Password" type="password">
+    </div>
+
+    <div class="form-group">
+        <input class="form-control" id="reenter" name="password" placeholder="Confirm Password" type="password">
+    </div>
+    <small id="passwordHelpInline" class="form-text text-muted">
+      Your password must be 6-20 characters long, contain letters, numbers, and special characters.
+    </small>
+    <br>
+
+    <input class="btn btn-primary" id="submit" type="submit" value="Register" disabled>
+
+</form>
+
+
+
+<script>
+    document.querySelector("#reenter").onkeyup = function() {
+        var paswd=  /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,20}$/;
+        if(document.querySelector("#password").value == document.querySelector("#reenter").value && document.querySelector("#password").value.match(paswd))
+        {
+            document.querySelector("#submit").disabled = false;
+        }
+        else if(document.querySelector("#password").value !== document.querySelector("#reenter").value)
+         {
+            document.querySelector("#submit").disabled = true;
+        }
+        else
+        {
+            document.querySelector("#submit").disabled = true;
+        }
+
+    }
+</script>
+</main>
+{% endblock %}
+

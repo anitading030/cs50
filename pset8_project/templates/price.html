@@ -1,0 +1,66 @@
+{% extends "layout.html" %}
+
+{% block main %}
+
+<main class="container p-5">
+
+
+
+<form action="/price" method="post">
+
+<div class="form-group">
+<h2>Browse</h2>
+</div>
+
+<div class="form-group">
+<table style="margin-left: auto; margin-right: auto">
+    <tr>
+        <th>Company</th>
+        <td>{{ name }}</td>
+    </tr>
+    <tr>
+        <th>Symbol</th>
+        <td><input id='symbol' type="text" readonly class="form-control" name="symbol" value={{symbol}} style="text-align: center"></td>
+    </tr>
+    <tr>
+        <th>Offer Price</th>
+        <td>{{ price }}</td>
+    </tr>
+</table>
+</div>
+
+<div class="form-group">
+<input class="btn btn-primary" id="buy" name="buy" type="submit" value="Buy">
+<input class="btn btn-primary" id="sell" name="sell" type="submit" value="Sell">
+</div>
+
+</form>
+
+
+
+
+
+<script>
+var stock = document.getElementById("symbol").value;
+const usp = new URLSearchParams(`?symbol=${stock}`)
+document.write(`<script src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-info.js">
+{
+"symbol": "${usp.get("symbol")}",
+"width": "100%","locale": "in",
+"colorTheme": "light",
+"isTransparent": false
+}
+<\/script>`)
+
+</script>
+
+
+
+
+
+
+
+
+
+</main>
+{% endblock %}

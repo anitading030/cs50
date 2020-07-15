@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block main %}
+
+<main class="container p-5">
+
+<form action="/buy" method="post">
+    <input class="form-control" name="buy" id="buy" type="text" placeholder="Symbol" value={{ symbol }}> <br> <br>
+    <input class="form-control" name="shares" id="shares" type="number" value="0" min="0" step="1" placeholder="Shares"> <br><br>
+    <input class="btn btn-primary" id="submit" type="submit" value="Buy" disabled>
+</form>
+
+
+<script>
+    document.querySelector("#shares").onkeyup = function() {
+        if(document.querySelector("#buy").value == "" || document.querySelector("#shares").value <= 0){
+            document.querySelector("#submit").disabled = true;
+        } else{
+            document.querySelector("#submit").disabled = false;
+        }
+
+    }
+</script>
+
+</main>
+{% endblock %}

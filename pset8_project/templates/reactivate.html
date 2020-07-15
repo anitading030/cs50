@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% block main %}
+
+<main class="container p-5">
+
+<div class="form-group">
+<h3>Reset Password</h3>
+</div>
+
+<form action="/reactivate" method="post">
+
+    <div class="form-group">
+        <input class="form-control" id="username" name="username" placeholder="Username" type="text">
+    </div>
+
+    <div class="form-group">
+         <input class="form-control" id="email" name="email" placeholder="Email" type="email">
+    </div>
+
+    <input class="btn btn-primary" id="submit" type="submit" value="Verify Account" disabled>
+
+</form>
+
+
+
+
+
+<script>
+    document.querySelector("#email").onkeyup = function() {
+        if(document.querySelector("#email").value !=="" && document.querySelector("#username") !== "")
+        {
+            document.querySelector("#submit").disabled = false;
+        }
+        else
+        {
+            document.querySelector("#submit").disabled = true;
+        }
+    }
+</script>
+
+
+
+
+</main>
+{% endblock %}
